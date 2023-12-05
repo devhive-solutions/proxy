@@ -94,8 +94,8 @@ yum -y install wget gcc net-tools bsdtar zip >/dev/null
 
 install_3proxy
 
-echo "working folder = ~"
-WORKDIR="~"
+echo "working folder = ~/proxy"
+WORKDIR="~/proxy"
 WORKDATA="${WORKDIR}/data.txt"
 mkdir $WORKDIR && cd $_
 
