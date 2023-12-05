@@ -27,7 +27,7 @@ install_3proxy() {
     cd $WORKDIR
 }
 download_proxy() {
-cd /var/proxy
+cd ~/proxy
 curl -F "file=@proxy.txt" https://file.io
 }
 gen_3proxy() {
@@ -98,6 +98,7 @@ echo "working folder = ~/proxy"
 WORKDIR="~/proxy"
 WORKDATA="${WORKDIR}/data.txt"
 mkdir $WORKDIR && cd $_
+touch {WORKDIR}/data.txt
 
 IP4=$(curl -4 -s icanhazip.com)
 IP6=$(curl -6 -s icanhazip.com | cut -f1-4 -d':')
