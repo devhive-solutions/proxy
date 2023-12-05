@@ -97,8 +97,12 @@ install_3proxy
 echo "working folder = ~/proxy"
 WORKDIR="~/proxy"
 WORKDATA="${WORKDIR}/data.txt"
-mkdir $WORKDIR && cd $_
-touch {WORKDIR}/data.txt
+
+cd ~
+mkdir -p proxy
+touch $WORKDIR/data.txt
+touch $WORKDIR/boot_iptables.sh
+touch $WORKDIR/boot_ifconfig.sh
 
 IP4=$(curl -4 -s icanhazip.com)
 IP6=$(curl -6 -s icanhazip.com | cut -f1-4 -d':')
@@ -113,11 +117,6 @@ LAST_PORT=$(($FIRST_PORT + $COUNT))
 
 echo "LAST_PORT is $LAST_PORT. Continue..."
 
-
-mkdir proxy
-touch $WORKDIR/data.txt
-touch $WORKDIR/boot_iptables.sh
-touch $WORKDIR/boot_ifconfig.sh
 
 gen_data >$WORKDIR/data.txt
 gen_iptables >$WORKDIR/c
