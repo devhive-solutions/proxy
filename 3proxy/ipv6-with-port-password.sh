@@ -100,7 +100,7 @@ WORKDATA="${WORKDIR}/data.txt"
 
 cd ~
 mkdir -p proxy
-sleep 1
+/bin/sleep 1
 touch $WORKDIR/data.txt
 touch $WORKDIR/boot_iptables.sh
 touch $WORKDIR/boot_ifconfig.sh
