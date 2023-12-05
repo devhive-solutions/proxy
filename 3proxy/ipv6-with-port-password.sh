@@ -27,7 +27,7 @@ install_3proxy() {
     cd $WORKDIR
 }
 download_proxy() {
-cd /home/cloudfly
+cd /var/proxy
 curl -F "file=@proxy.txt" https://file.io
 }
 gen_3proxy() {
@@ -63,8 +63,10 @@ EOF
 
 
 gen_data() {
+    userproxy=$(random)
+    passproxy=$(random)
     seq $FIRST_PORT $LAST_PORT | while read port; do
-        echo "user$port/$(random)/$IP4/$port/$(gen64 $IP6)"
+        echo "$userproxy/$passproxy/$IP4/$port/$(gen64 $IP6)"
     done
 }
 
@@ -92,8 +94,8 @@ yum -y install wget gcc net-tools bsdtar zip >/dev/null
 
 install_3proxy
 
-echo "working folder = /home/cloudfly"
-WORKDIR="/home/cloudfly"
+echo "working folder = ~/proxy"
+WORKDIR="~/proxy"
 WORKDATA="${WORKDIR}/data.txt"
 mkdir $WORKDIR && cd $_
 
@@ -102,17 +104,12 @@ IP6=$(curl -6 -s icanhazip.com | cut -f1-4 -d':')
 
 echo "Internal ip = ${IP4}. Exteranl sub for ip6 = ${IP6}"
 
-while :; do
-  read -p "Enter FIRST_PORT between 10000 and 60000: " FIRST_PORT
-  [[ $FIRST_PORT =~ ^[0-9]+$ ]] || { echo "Enter a valid number"; continue; }
-  if ((FIRST_PORT >= 10000 && FIRST_PORT <= 60000)); then
-    echo "OK! Valid number"
-    break
-  else
-    echo "Number out of range, try again"
-  fi
-done
-LAST_PORT=$(($FIRST_PORT + 750))
+echo "How many proxy do you want to create? Example 500"
+read COUNT
+
+FIRST_PORT=10000
+LAST_PORT=$(($FIRST_PORT + $COUNT))
+
 echo "LAST_PORT is $LAST_PORT. Continue..."
 
 gen_data >$WORKDIR/data.txt
