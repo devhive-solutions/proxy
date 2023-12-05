@@ -114,7 +114,7 @@ LAST_PORT=$(($FIRST_PORT + $COUNT))
 echo "LAST_PORT is $LAST_PORT. Continue..."
 
 
-mkdir $WORKDIR
+mkdir proxy
 touch $WORKDIR/data.txt
 touch $WORKDIR/boot_iptables.sh
 touch $WORKDIR/boot_ifconfig.sh
