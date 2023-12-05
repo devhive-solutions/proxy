@@ -113,8 +113,14 @@ LAST_PORT=$(($FIRST_PORT + $COUNT))
 
 echo "LAST_PORT is $LAST_PORT. Continue..."
 
+
+mkdir $WORKDIR
+touch $WORKDIR/data.txt
+touch $WORKDIR/boot_iptables.sh
+touch $WORKDIR/boot_ifconfig.sh
+
 gen_data >$WORKDIR/data.txt
-gen_iptables >$WORKDIR/boot_iptables.sh
+gen_iptables >$WORKDIR/c
 gen_ifconfig >$WORKDIR/boot_ifconfig.sh
 chmod +x boot_*.sh /etc/rc.local
 
