@@ -101,9 +101,9 @@ WORKDATA="${WORKDIR}/data.txt"
 cd ~
 mkdir -p proxy
 /bin/sleep 1
-touch $WORKDIR/data.txt
-touch $WORKDIR/boot_iptables.sh
-touch $WORKDIR/boot_ifconfig.sh
+cat > $WORKDIR/data.txt
+cat > $WORKDIR/boot_iptables.sh
+cat > $WORKDIR/boot_ifconfig.sh
 
 IP4=$(curl -4 -s icanhazip.com)
 IP6=$(curl -6 -s icanhazip.com | cut -f1-4 -d':')
